@@ -9,7 +9,7 @@ conn = mysql.connector.connect(
    user='root', password='', host='localhost', database='session')
 cursor = conn.cursor()
 select_stmt = (
-"""SELECT * FROM users WHERE username {}""".format(sys.argv[1])
+"""SELECT * FROM users WHERE username='yadnesh'""")
 )
 cursor.execute(select_stmt)
 records = cursor.fetchone()
