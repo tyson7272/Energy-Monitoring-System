@@ -9,11 +9,11 @@ conn = mysql.connector.connect(
    user='root', password='', host='localhost', database='session')
 cursor = conn.cursor()
 select_stmt = (
-"""SELECT * FROM users WHERE username='yadnesh'""")
-)
+"SELECT * FROM users WHERE username='{}'".format(sys.argv[1]))
+
 cursor.execute(select_stmt)
 records = cursor.fetchone()
-conn.close()
+
 
 insert_stmt = (
    "INSERT INTO otp_expiry(otp,is_expired,create_at)"
@@ -30,5 +30,5 @@ msg="Subject: {}\n\n{}".format(subject,str(num))
 s = smtplib.SMTP('smtp.gmail.com', 587)
 s.starttls()
 s.login("smartdwelltech@gmail.com", "rbxlhcihbxhmfpfr")
-s.sendmail("smartdwelltech@gmail.com", str(records), msg)
+s.sendmail("smartdwelltech@gmail.com", str(records[2]), msg)
 s.quit()
