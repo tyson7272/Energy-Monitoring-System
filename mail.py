@@ -15,12 +15,11 @@ cursor.execute(select_stmt)
 records = cursor.fetchone()
 
 
-insert_stmt = (
-   "INSERT INTO otp_expiry(otp,is_expired,create_at)"
-   "VALUES (%s, %s,%s)"
+update_otp = (
+   "UPDATE users SET otp=%s,otp_created=%s WHERE username=%s"
 )
-data = (num, '0',now)
-cursor.execute(insert_stmt, data)
+data = (num,now,str(sys.argv[1]))
+cursor.execute(update_otp, data)
 print(cursor.rowcount)
 conn.commit()
 conn.close()
